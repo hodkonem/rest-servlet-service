@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 public class House {
-    private int id;
+    private long id;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Person> persons;

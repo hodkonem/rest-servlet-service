@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Car {
-    private int id;
+    private long id;
     private Person person;
 }
