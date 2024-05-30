@@ -1,4 +1,6 @@
 package ru.latypov.service;
 
-public interface PersonCrudService {
+import ru.latypov.entity.Person;
+
+public interface PersonCrudService extends CrudService {
 }

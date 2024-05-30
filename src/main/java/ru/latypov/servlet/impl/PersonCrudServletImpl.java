@@ -1,4 +1,6 @@
-package ru.latypov.servlet;
+package ru.latypov.servlet.impl;
 
-public class PersonCrudServletImpl {
+import ru.latypov.servlet.PersonCrudServlet;
+
+public class PersonCrudServletImpl implements PersonCrudServlet {
 }

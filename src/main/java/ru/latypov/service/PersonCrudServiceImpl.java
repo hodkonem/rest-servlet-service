@@ -1,4 +1,8 @@
 package ru.latypov.service;
 
-public class PersonCrudServiceImpl {
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class PersonCrudServiceImpl implements PersonCrudService {
+    private PersonCrudService personCrudService;
 }

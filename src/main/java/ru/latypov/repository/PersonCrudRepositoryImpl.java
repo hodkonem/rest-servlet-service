@@ -1,4 +1,4 @@
 package ru.latypov.repository;
 
-public class PersonCrudRepositoryImpl {
+public class PersonCrudRepositoryImpl implements PersonCrudRepository {
 }

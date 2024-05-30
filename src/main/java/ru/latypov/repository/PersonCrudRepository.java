@@ -1,4 +1,6 @@
 package ru.latypov.repository;
 
-public interface PersonCrudRepository {
+import ru.latypov.entity.Person;
+
+public interface PersonCrudRepository extends CrudRepository {
 }

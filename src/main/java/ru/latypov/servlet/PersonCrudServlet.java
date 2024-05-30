@@ -1,4 +1,4 @@
 package ru.latypov.servlet;
 
-public interface PersonCrudServlet {
+public interface PersonCrudServlet extends CrudServlet {
 }
