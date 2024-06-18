@@ -23,7 +23,7 @@ class PersonDaoImplTest {
     }
 
     @Test
-    void CreatePerson() {
+    void createPerson() {
         Person person = new Person();
         person.setName("testCreatePerson");
         Person createdPerson = dao.createPerson(person);
