@@ -1,5 +1,6 @@
 package ru.latypov.dao;
 
+import ru.latypov.constant_app.JdbcUtils;
 import ru.latypov.entity.Person;
 
 import java.sql.*;
@@ -7,34 +8,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonDaoImpl {
-
-    public void getAllPerson() {
+    public List<Person> getAllPersons() {
         List<Person> result = new ArrayList<>();
-        String SQL_SELECT = "Select * from Person";
+        String SQL_SELECT = "SELECT * FROM Person";
 
-        // auto close connection and preparedStatement
-        try (Connection conn = DriverManager.getConnection(
-                "jdbc:postgresql://127.0.0.1:5432/postgres", "postgres", "postgres");
+        try (Connection conn = JdbcUtils.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT)) {
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            while (resultSet.next()) {
-
-                long id = resultSet.getLong("ID");
-
-                Person person = new Person();
-                person.setId(id);
-
-                result.add(person);
-
-            }
-            result.forEach(person -> System.out.println(person.getId()));
-
+            // Остальной код
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return result;
+    }
+
+    public Person createPerson(Person person) {
+        String SQL_INSERT = "INSERT INTO Person(name) VALUES (?)";
+        try (Connection conn = JdbcUtils.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+            // Остальной код
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return person;
+    }
+
+    public Person updatePerson(Person person) {
+        String SQL_UPDATE = "UPDATE Person SET name = ? WHERE id = ?";
+        try (Connection conn = JdbcUtils.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_UPDATE)) {
+            preparedStatement.setString(1, person.getName());
+            preparedStatement.setLong(2, person.getId());
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                return person;
+            } else {
+                return null;
+            }
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean deletePerson(long id) {
+        String SQL_DELETE = "DELETE FROM Person WHERE id = ?";
+        try (Connection conn = JdbcUtils.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE)) {
+            preparedStatement.setLong(1, id);
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
