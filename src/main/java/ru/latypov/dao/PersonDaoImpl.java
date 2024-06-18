@@ -13,8 +13,14 @@ public class PersonDaoImpl {
         String SQL_SELECT = "SELECT * FROM Person";
 
         try (Connection conn = JdbcUtils.getConnection();
-             PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT)) {
-            // Остальной код
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            while (resultSet.next()) {
+                Person person = new Person();
+                person.setId(resultSet.getLong("id"));
+                person.setName(resultSet.getString("name"));
+                result.add(person);
+            }
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (Exception e) {
@@ -43,7 +49,6 @@ public class PersonDaoImpl {
         }
         return null;
     }
-
 
     public Person createPerson(Person person) {
         String SQL_INSERT = "INSERT INTO Person(name) VALUES (?)";
@@ -110,5 +115,17 @@ public class PersonDaoImpl {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void deleteAllPersons() {
+        String SQL_DELETE = "DELETE FROM Person";
+        try (Connection conn = JdbcUtils.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE)) {
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
