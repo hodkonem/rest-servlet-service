@@ -27,14 +27,27 @@ public class PersonDaoImpl {
         String SQL_INSERT = "INSERT INTO Person(name) VALUES (?)";
         try (Connection conn = JdbcUtils.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
-            // Остальной код
+            preparedStatement.setString(1, person.getName());
+            int affectedRows = preparedStatement.executeUpdate();
+
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        person.setId(generatedKeys.getLong(1));
+                    }
+                }
+                return person;
+            } else {
+                return null;
+            }
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return person;
+        return null;
     }
+
 
     public Person updatePerson(Person person) {
         String SQL_UPDATE = "UPDATE Person SET name = ? WHERE id = ?";
