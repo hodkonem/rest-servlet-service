@@ -23,6 +23,28 @@ public class PersonDaoImpl {
         return result;
     }
 
+    public Person getPersonById(long id) {
+        String SQL_SELECT = "SELECT * FROM Person WHERE id = ?";
+        try (Connection conn = JdbcUtils.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT)) {
+            preparedStatement.setLong(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    Person person = new Person();
+                    person.setId(resultSet.getLong("id"));
+                    person.setName(resultSet.getString("name"));
+                    return person;
+                }
+            }
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public Person createPerson(Person person) {
         String SQL_INSERT = "INSERT INTO Person(name) VALUES (?)";
         try (Connection conn = JdbcUtils.getConnection();
