@@ -1,22 +1,38 @@
 package ru.latypov;
 
 import ru.latypov.dao.PersonDaoImpl;
-import ru.latypov.entity.Person;
+import ru.latypov.dto.PersonDTO;
+import ru.latypov.servlet.impl.PersonCrudServletImpl;
 
 public class Main {
+
     public static void main(String[] args) {
+//        PersonDaoImpl personDao = new PersonDaoImpl();
+//
+//        // Проверка метода getAllPersons()
+//        List<Person> allPersons = personDao.getAllPersons();
+//        System.out.println("All Persons:");
+//        for (Person person : allPersons) {
+//            System.out.println(person);
+//        }
+//
+//        // Проверка метода getPersonById()
+//        long id = 1; // Укажите существующий id
+//        Person personById = personDao.getPersonById(id);
+//        System.out.println("Person with id=" + id + ": " + personById);
+//
+//        // Проверка метода createPerson()
+//        Person newPerson = new Person("New Person");
+//        Person createdPerson = personDao.createPerson(newPerson);
+//        System.out.println("Created Person: " + createdPerson);
+//
+//        // Проверка метода updatePerson()
+//        Person personToUpdate = allPersons.get(0); // Получаем первого человека из списка
+//        personToUpdate.setName("Updated Name");
+//        Person updatedPerson = personDao.updatePerson(personToUpdate);
+//        System.out.println("Updated Person: " + updatedPerson);
 
-        PersonDaoImpl personDao = new PersonDaoImpl();
-        Person person = new Person();
-        person.setName("testCreate");
-
-        // Проверка поиска существующего объекта
-        Person createdPerson = personDao.createPerson(person);
-        System.out.println("Created person: " + createdPerson);
-
-        Person foundPerson = personDao.getPersonById(createdPerson.getId());
-        System.out.println("Found person: " + foundPerson);
-
-
+        PersonCrudServletImpl personCrudServlet = new PersonCrudServletImpl(new PersonDaoImpl());
+        personCrudServlet.createPerson(new PersonDTO("Vasya"));
     }
 }

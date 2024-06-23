@@ -24,21 +24,17 @@ class PersonDaoImplTest {
 
     @Test
     void createPerson() {
-        Person person = new Person();
-        person.setName("testCreatePerson");
+        Person person = new Person("testCreatePerson");
         Person createdPerson = dao.createPerson(person);
-       assertNotNull(createdPerson);
-       assertEquals(person.getName(), createdPerson.getName());
+        assertNotNull(createdPerson);
+        assertEquals(person.getName(), createdPerson.getName());
     }
-
     @Test
     void getAllPersons() {
-        Person person1 = new Person();
-        person1.setName("person1");
+        Person person1 = new Person("person1");
         dao.createPerson(person1);
 
-        Person person2 = new Person();
-        person2.setName("person2");
+        Person person2 = new Person("person2");
         dao.createPerson(person2);
 
         List<Person> persons = dao.getAllPersons();
@@ -47,19 +43,16 @@ class PersonDaoImplTest {
 
     @Test
     void updatePerson() {
-        Person person = new Person();
-        person.setName("testUpdatePerson");
+        Person person = new Person("testUpdatePerson");
         var createdPerson = dao.createPerson(person);
 
-        createdPerson.setName("updatedPerson");
         var updatedPerson = dao.updatePerson(createdPerson);
         assertEquals("updatedPerson", updatedPerson.getName());
     }
 
     @Test
     void deletePerson() {
-        Person person = new Person();
-        person.setName("testDeletePerson");
+        Person person = new Person("testDeletePerson");
         var createdPerson = dao.createPerson(person);
 
         boolean deleted = dao.deletePerson(createdPerson.getId());
