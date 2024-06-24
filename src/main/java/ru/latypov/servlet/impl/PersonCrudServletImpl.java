@@ -4,7 +4,7 @@ import ru.latypov.dao.PersonDaoImpl;
 import ru.latypov.dto.PersonDTO;
 import ru.latypov.entity.Person;
 import ru.latypov.mapper.PersonMapper;
-import ru.latypov.service.PersonCrudServiceImpl;
+import ru.latypov.service.impl.PersonCrudServiceImpl;
 import ru.latypov.servlet.PersonCrudServlet;
 
 import java.util.List;

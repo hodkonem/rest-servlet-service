@@ -8,4 +8,9 @@ import lombok.NoArgsConstructor;
 public class Car {
     private long id;
     private Person person;
+    private String model;
+
+    public Long getPersonId() {
+        return person.getId();
+    }
 }

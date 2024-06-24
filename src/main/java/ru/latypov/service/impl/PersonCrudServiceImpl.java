@@ -1,8 +1,9 @@
-package ru.latypov.service;
+package ru.latypov.service.impl;
 
 import lombok.AllArgsConstructor;
 import ru.latypov.dao.PersonDaoImpl;
 import ru.latypov.entity.Person;
+import ru.latypov.service.PersonCrudService;
 
 import java.util.List;
 

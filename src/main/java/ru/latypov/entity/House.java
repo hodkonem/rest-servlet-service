@@ -12,4 +12,5 @@ public class House {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Person> persons;
+    private String street;
 }
