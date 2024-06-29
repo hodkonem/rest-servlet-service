@@ -1,37 +1,38 @@
 package ru.latypov.service.impl;
 
 import lombok.AllArgsConstructor;
-import ru.latypov.dao.PersonDaoImpl;
 import ru.latypov.entity.Person;
+import ru.latypov.repository.impl.PersonCrudRepositoryImpl;
 import ru.latypov.service.PersonCrudService;
 
 import java.util.List;
 
 @AllArgsConstructor
 public class PersonCrudServiceImpl implements PersonCrudService {
-    private final PersonDaoImpl personDaoimpl;
+    private final PersonCrudRepositoryImpl personCrudRepository;
 
-    public Person getPersonById(long id) {
-        return personDaoimpl.getPersonById(id);
-    }
 
-    public List<Person> getAllPersons() {
-        return personDaoimpl.getAllPersons();
+    public Person createPerson(Person person) {
+        return personCrudRepository.createPerson(person);
     }
 
     public Person updatePerson(Person person) {
-        return personDaoimpl.updatePerson(person);
+        return personCrudRepository.updatePerson(person);
     }
 
-    public void deletePerson(long id) {
-        personDaoimpl.deletePerson(id);
+    public Person getPersonById(long id) {
+        return personCrudRepository.getPersonById(id);
     }
 
-    public Person createPerson(Person person) {
-        return personDaoimpl.createPerson(person);
+    public List<Person> getAllPersons() {
+        return personCrudRepository.getAllPersons();
     }
 
     public void deleteAllPersons() {
-        personDaoimpl.deleteAllPersons();
+        personCrudRepository.deleteAllPersons();
+    }
+
+    public void deletePerson(long id) {
+        personCrudRepository.deletePersonById(id);
     }
 }

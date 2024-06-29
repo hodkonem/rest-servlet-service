@@ -4,6 +4,7 @@ import ru.latypov.dao.PersonDaoImpl;
 import ru.latypov.dto.PersonDTO;
 import ru.latypov.entity.Person;
 import ru.latypov.mapper.PersonMapper;
+import ru.latypov.repository.impl.PersonCrudRepositoryImpl;
 import ru.latypov.service.impl.PersonCrudServiceImpl;
 import ru.latypov.servlet.PersonCrudServlet;
 
@@ -14,7 +15,7 @@ public class PersonCrudServletImpl implements PersonCrudServlet {
     private final PersonCrudServiceImpl personCrudServiceImpl;
 
     public PersonCrudServletImpl(PersonDaoImpl personDaoImpl) {
-        this.personCrudServiceImpl = new PersonCrudServiceImpl(personDaoImpl);
+        this.personCrudServiceImpl = new PersonCrudServiceImpl(new PersonCrudRepositoryImpl());
     }
 
     public PersonDTO createPerson(PersonDTO personDTO) {

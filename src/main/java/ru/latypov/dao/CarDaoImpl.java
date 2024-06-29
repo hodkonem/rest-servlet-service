@@ -51,7 +51,7 @@ public class CarDaoImpl {
     }
 
     public Car createCar(Car car) {
-        String SQL_INSERT = "INSERT INTO Car(id, model, person_id) VALUES (?, ?, ?)";
+        String SQL_INSERT = "INSERT INTO Car(model, person_id) VALUES (?, ?)";
         try (Connection conn = JdbcUtils.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, car.getModel());

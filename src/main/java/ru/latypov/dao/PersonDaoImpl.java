@@ -53,8 +53,7 @@ public class PersonDaoImpl {
         return null;
     }
 
-    public Person createPerson(Person person, PersonValidateServiceImpl validateService) {
-        this.personValidateService = validateService;
+    public Person createPerson(Person person) {
         String SQL_INSERT = "INSERT INTO Person(name) VALUES (?)";
         try (Connection conn = JdbcUtils.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS)) {
@@ -69,7 +68,7 @@ public class PersonDaoImpl {
                 }
                 return person;
             } else {
-                throw new IllegalArgumentException("Name must not contain digits");
+                throw new IllegalArgumentException("Name must not contain digits"); //todo посмотреть
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
