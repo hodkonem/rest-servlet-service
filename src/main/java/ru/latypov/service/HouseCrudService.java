@@ -1,4 +1,20 @@
 package ru.latypov.service;
 
-public interface HouseCrudService extends CrudService{
+import ru.latypov.entity.House;
+
+import java.util.List;
+
+public interface HouseCrudService{
+
+    void deleteAll();
+
+    void deleteById(Long id);
+
+    House update(House house);
+
+    List<House> getAll();
+
+    House getById(Long id);
+
+    House create(House house);
 }

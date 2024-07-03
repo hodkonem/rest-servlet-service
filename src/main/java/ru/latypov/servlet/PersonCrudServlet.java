@@ -1,4 +1,8 @@
 package ru.latypov.servlet;
 
-public interface PersonCrudServlet extends CrudServlet {
+import ru.latypov.dto.PersonDTO;
+import ru.latypov.entity.Person;
+
+public interface PersonCrudServlet extends CrudServlet<PersonDTO> {
 }
+

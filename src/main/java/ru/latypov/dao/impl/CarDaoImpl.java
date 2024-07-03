@@ -1,13 +1,14 @@
-package ru.latypov.dao;
+package ru.latypov.dao.impl;
 
 import ru.latypov.constant_app.JdbcUtils;
+import ru.latypov.dao.CarDao;
 import ru.latypov.entity.Car;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarDaoImpl {
+public class CarDaoImpl implements CarDao {
     public List<Car> getAllCars() {
         List<Car> result = new ArrayList<>();
         String SQL_SELECT = "SELECT * FROM Car";
@@ -66,14 +67,14 @@ public class CarDaoImpl {
                 }
                 return car;
             } else {
-                return null;
+                throw new RuntimeException("Машина по заданным параметрам не создана");
             }
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        throw new RuntimeException("Машина по заданным параметрам не создана");
     }
 
     public Car updateCar(Car car) {
@@ -87,14 +88,14 @@ public class CarDaoImpl {
             if (affectedRows > 0) {
                 return car;
             } else {
-                return null;
+                throw new RuntimeException("Машина по заданным параметрам не найдена");
             }
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        throw new RuntimeException("Машина по заданным параметрам не найдена");
     }
 
     public boolean deleteCar(long id) {
@@ -129,7 +130,7 @@ public class CarDaoImpl {
         }
     }
 
-    public void addOwnerToCar(Long idCar, Long idPerson) {
+    public void addOwnerToCar(Long idCar, Long idPerson)  {
         String SQL_UPDATE_CAR = "UPDATE Car SET person_id = ? WHERE id = ?";
         try (Connection conn = JdbcUtils.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_UPDATE_CAR)) {

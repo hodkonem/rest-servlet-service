@@ -1,7 +1,7 @@
 package ru.latypov;
 
-import ru.latypov.dao.PersonDaoImpl;
-import ru.latypov.dto.PersonDTO;
+import ru.latypov.entity.Person;
+import ru.latypov.repository.impl.PersonCrudRepositoryImpl;
 import ru.latypov.servlet.impl.PersonCrudServletImpl;
 
 public class Main {
@@ -32,7 +32,9 @@ public class Main {
 //        Person updatedPerson = personDao.updatePerson(personToUpdate);
 //        System.out.println("Updated Person: " + updatedPerson);
 
-        PersonCrudServletImpl personCrudServlet = new PersonCrudServletImpl(new PersonDaoImpl());
-        personCrudServlet.createPerson(new PersonDTO("Vasya"));
+        PersonCrudRepositoryImpl personCrudRepository = new PersonCrudRepositoryImpl();
+        PersonCrudServletImpl personCrudServlet = new PersonCrudServletImpl(personCrudRepository);
+        personCrudServlet.create(new Person("Vasya"));
+
     }
 }

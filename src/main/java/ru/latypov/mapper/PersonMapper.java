@@ -20,5 +20,6 @@ public interface PersonMapper {
     default List<CarDTO> mapCarToDto(Person person){
        return CarMapper.INSTANCE.toDtoList(person.getCars());
     }
-    // todo настроить мапинг в персонДТО домов аналогично тому, как настроены машины
+    List<PersonDTO> toDtoList(List<Person> personList);
+    //todo настроить мапинг в персонДТО домов аналогично тому, как настроены машины
 }

@@ -1,4 +1,19 @@
 package ru.latypov.repository;
 
-public interface CarCrudRepository extends CrudRepository{
+import ru.latypov.entity.Car;
+
+import java.util.List;
+
+public interface CarCrudRepository {
+    void deleteAll();
+
+    void deleteById(Long id);
+
+    Car update(Car car);
+
+    List<Car> getAll();
+
+    Car getById(Long id);
+
+    Car create(Car car);
 }

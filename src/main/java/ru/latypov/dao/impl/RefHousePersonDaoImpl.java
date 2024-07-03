@@ -1,4 +1,4 @@
-package ru.latypov.dao;
+package ru.latypov.dao.impl;
 
 import ru.latypov.constant_app.JdbcUtils;
 import ru.latypov.entity.House;
@@ -31,10 +31,6 @@ public class RefHousePersonDaoImpl {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        //todo написать метод, который удаляет все записи из таблицы ref_house_person по person_id,
-        //todo написать метод, получение всех жителей в определённом доме. Даётся house_id
-        //todo оптимальнее использовать join. Надо заджойнить таблицы ref_house_person и person
     }
 
     public List<Person> getAllPersonsByHouseId(Long houseId) {
@@ -43,7 +39,7 @@ public class RefHousePersonDaoImpl {
 
         try (Connection conn = JdbcUtils.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT);
-             ) {
+        ) {
             preparedStatement.setLong(1, houseId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -66,7 +62,7 @@ public class RefHousePersonDaoImpl {
              PreparedStatement preparedStatement = conn.prepareStatement(SQL_DELETE);
         ) {
             preparedStatement.setLong(1, id);
-           preparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
         } catch (Exception e) {
@@ -85,8 +81,8 @@ public class RefHousePersonDaoImpl {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 House house = new House();
-               house.setId(resultSet.getLong("id"));
-               house.setStreet(resultSet.getString("street"));
+                house.setId(resultSet.getLong("id"));
+                house.setStreet(resultSet.getString("street"));
                 result.add(house);
             }
         } catch (SQLException e) {

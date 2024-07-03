@@ -1,4 +1,6 @@
 package ru.latypov.repository;
 
-public interface HouseCrudRepository extends CrudRepository {
+import ru.latypov.entity.House;
+
+public interface HouseCrudRepository extends CrudRepository<House> {
 }

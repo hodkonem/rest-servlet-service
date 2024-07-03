@@ -1,4 +1,4 @@
-package ru.latypov.dao;
+package ru.latypov.dao.impl;
 
 import ru.latypov.constant_app.JdbcUtils;
 import ru.latypov.entity.Car;
@@ -13,7 +13,6 @@ import java.util.List;
 public class RefCarPersonDaoImpl {
     //todo написать метод добавления жителю машины
     //todo реализовать каскадное удаление. Если удаляем Персона, то у него удаляются все машины с совпадением person_id
-    //todo получить все машины по person_id
 
     public void deleteCarByPersonId(Long personId) {}
 

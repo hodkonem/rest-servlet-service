@@ -1,8 +1,8 @@
 package ru.latypov.repository.impl;
 
-import ru.latypov.dao.PersonDaoImpl;
-import ru.latypov.dao.RefCarPersonDaoImpl;
-import ru.latypov.dao.RefHousePersonDaoImpl;
+import ru.latypov.dao.impl.PersonDaoImpl;
+import ru.latypov.dao.impl.RefCarPersonDaoImpl;
+import ru.latypov.dao.impl.RefHousePersonDaoImpl;
 import ru.latypov.entity.Person;
 import ru.latypov.repository.PersonCrudRepository;
 
